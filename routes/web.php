@@ -29,7 +29,10 @@ require __DIR__.'/auth.php';
 Route::group(['prefix' => 'admin'], function() {
     Route::group(['middleware' => 'admin.guest'], function(){
         Route::view('/login','admin.login')->name('admin.login');
-        Route::post('/login',[App\Http\Controllers\Admin\AdminController::class, 'authenticate'])->name('admin.auth');
+
+        Route::post('/login',
+            [App\Http\Controllers\Admin\AdminController::class, 'authenticate']
+        )->name('admin.auth');
     });
     
     Route::group(['middleware' => 'admin.auth'], function(){
@@ -37,14 +40,18 @@ Route::group(['prefix' => 'admin'], function() {
             return redirect()->route('admin.dashboard');
         });
 
-        Route::get('/dashboard',[App\Http\Controllers\Admin\DashboardController::class, 'dashboard'])->name('admin.dashboard');
-        Route::post('/logout', [App\Http\Controllers\Admin\AdminController::class, 'logout'])->name('admin.logout');
+        Route::get('/dashboard',
+            [App\Http\Controllers\Admin\DashboardController::class, 'dashboard']
+        )->name('admin.dashboard');
+
+        Route::post('/logout', 
+            [App\Http\Controllers\Admin\AdminController::class, 'logout']
+        )->name('admin.logout');
+
         Route::get('/logout', function(){
             return redirect()->route('admin.login');
         });
 
-        Route::get('/user-list', function(){
-            return view('admin.user-list');
-        });
+        
     });
 });
