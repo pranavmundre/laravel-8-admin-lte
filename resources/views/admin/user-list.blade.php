@@ -26,39 +26,16 @@
                   <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>X</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 5.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td>5</td>
-                    <td>C</td>
-                  </tr>
+                   
                   
                   </tbody>
                   <tfoot>
                   <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
+                    <th>Name</th>
+                    <th>Email</th>
                   </tr>
                   </tfoot>
                 </table>
@@ -73,12 +50,12 @@
 @section('page_header')
 
 <div class="col-sm-6">
-    <h1 class="m-0">Dashboard</h1>
+    <h1 class="m-0">User List</h1>
   </div><!-- /.col -->
   <div class="col-sm-6">
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
-      <li class="breadcrumb-item active">Dashboard</li>
+      <li class="breadcrumb-item active">User List</li>
     </ol>
   </div>
 @endsection
@@ -103,20 +80,38 @@
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
+      // "processing": true,
+      "serverSide": true,
+      {{-- "ajax": "{{ route('admin.user_table_data') }}", --}}
+      "ajax": {
+        "type": "get",
+        "url": "{{ route('admin.user_table_data') }}",
+        // "data": {
+        //     'csrf-token' : '{{ csrf_token() }}' 
+        //     },
+      },
+      // "columns": [
+      //       { "data": "Name" },
+      //       { "data": "email" },
+      //   ],
+      "responsive": true, 
+      "lengthChange": false, 
+      "autoWidth": false,
+      // "ordering": true,
+      
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
+    // $('#example2').DataTable({
+    //   "paging": true,
+    //   "lengthChange": false,
+    //   "searching": false,
+    //   "ordering": true,
+    //   "info": true,
+    //   "autoWidth": false,
+    //   "responsive": true,
+    // });
   });
 </script>
 

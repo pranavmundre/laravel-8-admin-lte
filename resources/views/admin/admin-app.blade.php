@@ -216,7 +216,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/user-list" class="nav-link {{ Request::routeIs('admin.user-list') ? 'active' : '' }}">
+                <a href="{{ route('admin.user_list') }}" class="nav-link {{ Request::routeIs('admin.user_list') ? 'active' : '' }}">
                   <i class="fa fa-list nav-icon"></i>
                   <p>List</p>
                 </a>

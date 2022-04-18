@@ -52,10 +52,13 @@ Route::group(['prefix' => 'admin'], function() {
             return redirect()->route('admin.login');
         });
 
-        Route::get('/u','admin.user-list')->name('admin.u');
 
-        Route::get('/user', 
+        Route::get('/user/list', 
             [App\Http\Controllers\Admin\UserDataController::class, 'index']
-        )->name('admin.user.list');
+        )->name('admin.user_list');
+
+        Route::get('/user/list-data', 
+            [App\Http\Controllers\Admin\UserDataController::class, 'userTableData']
+        )->name('admin.user_table_data');
     });
 });
