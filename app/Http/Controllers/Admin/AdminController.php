@@ -35,10 +35,5 @@ class AdminController extends Controller
         return redirect()->route('admin.login');
     }
 
-    public function dashboard()
-    {
-        $context = ['page_title'=> 'Dashboard'];
 
-        return view('admin.dashboard', $context);
-    }
 }
