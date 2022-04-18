@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +34,7 @@ Route::group(['prefix' => 'admin'], function() {
         Route::view('/login','admin.login')->name('admin.login');
 
         Route::post('/login',
-            [App\Http\Controllers\Admin\AdminController::class, 'authenticate']
+            [AdminController::class, 'authenticate']
         )->name('admin.auth');
     });
     
@@ -41,26 +44,26 @@ Route::group(['prefix' => 'admin'], function() {
         });
 
         Route::get('/dashboard',
-            [App\Http\Controllers\Admin\DashboardController::class, 'dashboard']
+            [DashboardController::class, 'dashboard']
         )->name('admin.dashboard');
 
         Route::post('/logout', 
-            [App\Http\Controllers\Admin\AdminController::class, 'logout']
+            [AdminController::class, 'logout']
         )->name('admin.logout');
 
         
         Route::get('/my-profile',
-            [App\Http\Controllers\Admin\AdminController::class, 'my_profile']
+            [AdminController::class, 'my_profile']
         )->name('admin.my_profile');
 
         Route::post('/my-profile',
-            [App\Http\Controllers\Admin\AdminController::class, 'update_profile']
+            [AdminController::class, 'update_profile']
         )->name('admin.update_profile');
 
         Route::view('/change-password', 'admin.change-password')->name('admin.change_password');
 
         Route::post('/change-password-submit', 
-            [App\Http\Controllers\Admin\AdminController::class, 'change_password']
+            [AdminController::class, 'change_password']
         )->name('admin.change_password_submit');
 
         Route::get('/logout', function(){
@@ -69,11 +72,11 @@ Route::group(['prefix' => 'admin'], function() {
 
 
         Route::get('/user/list', 
-            [App\Http\Controllers\Admin\UserDataController::class, 'index']
+            [UserDataController::class, 'index']
         )->name('admin.user_list');
 
-        Route::get('/user/list-data', 
-            [App\Http\Controllers\Admin\UserDataController::class, 'userTableData']
+        Route::get('/user/list-data',  
+            [UserDataController::class, 'userTableData']
         )->name('admin.user_table_data');
     });
 });
