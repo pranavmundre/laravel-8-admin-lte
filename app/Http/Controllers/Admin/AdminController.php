@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Validator, Auth, Hash;
+use Validator, Auth, Hash, Mail;
 use App\Models\Admin;
 
 class AdminController extends Controller
@@ -83,7 +83,16 @@ class AdminController extends Controller
         $user->password  = Hash::make($request->input('new_password'));
         $user->save();
 
-        session()->flash('user_status', 'Password Updated');
+
+        $data = array('name'=> $user->firstname);
+
+        Mail::send('admin.mails.change-password', $data, function($message) {
+             $message->to($user->email), config('app.name'))
+             ->subject('password changed successfully ');
+             
+             $message->from(config('mail.from.address'),'no reply');
+          });
+
         return redirect()->back()->with('success','password successfully updated');
     }
 
