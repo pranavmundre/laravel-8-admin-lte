@@ -48,6 +48,21 @@ Route::group(['prefix' => 'admin'], function() {
             [App\Http\Controllers\Admin\AdminController::class, 'logout']
         )->name('admin.logout');
 
+        
+        Route::get('/my-profile',
+            [App\Http\Controllers\Admin\AdminController::class, 'my_profile']
+        )->name('admin.my_profile');
+
+        Route::post('/my-profile',
+            [App\Http\Controllers\Admin\AdminController::class, 'update_profile']
+        )->name('admin.update_profile');
+
+        Route::view('/change-password', 'admin.change-password')->name('admin.change_password');
+
+        Route::post('/change-password-submit', 
+            [App\Http\Controllers\Admin\AdminController::class, 'change_password']
+        )->name('admin.change_password_submit');
+
         Route::get('/logout', function(){
             return redirect()->route('admin.login');
         });
