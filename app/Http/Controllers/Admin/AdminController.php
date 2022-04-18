@@ -84,13 +84,12 @@ class AdminController extends Controller
         $user->save();
 
 
-        $data = array('name'=> $user->firstname);
+        $data = array('name'=> $user->firstname, 'email'=> $user->email);
 
-        Mail::send('admin.mails.change-password', $data, function($message) {
-             $message->to($user->email), config('app.name'))
-             ->subject('password changed successfully ');
-             
-             $message->from(config('mail.from.address'),'no reply');
+        Mail::send('admin.mails.change-password', $data, function($message) use ($data) {
+             $message->to($data['email'], config('app.name'));
+             $message->subject('password changed successfully');
+             $message->from(config('mail.from.address'), 'no reply');
           });
 
         return redirect()->back()->with('success','password successfully updated');
