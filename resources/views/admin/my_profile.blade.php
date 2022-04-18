@@ -78,7 +78,7 @@
 
       </div>
       <div class="card-body">
-          <form class="form-horizontal" id="update_user" action="{{route('admin.update_profile')}}" method="post">
+          <form class="form-horizontal" id="update_user" action="{{route('admin.update_profile')}}" method="post" enctype='multipart/form-data'>
             @csrf
                 <div class="card-body">
                   <div class="form-group row">

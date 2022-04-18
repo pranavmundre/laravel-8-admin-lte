@@ -71,6 +71,10 @@ Route::group(['prefix' => 'admin'], function() {
         });
 
 
+        Route::view('/user/add', 'admin.user-add')->name('admin.user_add');
+        Route::post('/user/add', [UserDataController::class, 'add_user']);
+
+
         Route::get('/user/list', 
             [UserDataController::class, 'index']
         )->name('admin.user_list');

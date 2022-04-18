@@ -80,8 +80,9 @@
 <script>
   $(function () {
     $("#example1").DataTable({
-      // "processing": true,
+      "processing": true,
       "serverSide": true,
+
       {{-- "ajax": "{{ route('admin.user_table_data') }}", --}}
       "ajax": {
         "type": "get",
@@ -91,13 +92,16 @@
         //     },
       },
       // "columns": [
-      //       { "data": "Name" },
+      //       { "data": "name" },
       //       { "data": "email" },
       //   ],
       "responsive": true, 
       "lengthChange": false, 
       "autoWidth": false,
-      // "ordering": true,
+      "pageLength": 1,
+      // "ordering": false,
+      // "paging": true,
+      // "searching": true,
       
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');

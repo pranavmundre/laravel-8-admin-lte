@@ -25,7 +25,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.user_add') }}" class="nav-link {{ Request::routeIs('admin.user_add') ? 'active' : '' }}">
                   <i class="fas fa-user-plus nav-icon"></i>
                   <p>Add</p>
                 </a>
@@ -50,16 +50,17 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('admin.change_password') }}" class="nav-link {{ Request::routeIs('admin.change_password') ? 'active' : '' }}">
-                  <i class="fa fa-key nav-icon"></i>
-                  <p>Change Password</p>
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a href="{{ route('admin.my_profile') }}" class="nav-link {{ Request::routeIs('admin.my_profile') ? 'active' : '' }}">
                   <i class="far fa-user nav-icon"></i>
                   <p>My Profile</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.change_password') }}" class="nav-link {{ Request::routeIs('admin.change_password') ? 'active' : '' }}">
+                  <i class="fa fa-key nav-icon"></i>
+                  <p>Change Password</p>
                 </a>
               </li>
               {{-- <li class="nav-item">

@@ -32,7 +32,7 @@
                   </div>
                   <div class="form-group">
                     <label for="new_password">New Password</label>
-                    <input type="password" class="form-control @error('new_password')is-invalid @enderror" id="new_password" name="new_password" placeholder="Password" autocomplete="off">
+                    <input type="password" class="form-control @error('new_password')is-invalid @enderror" id="new_password" name="new_password" placeholder="New Password" autocomplete="off">
 
                     @error('new_password')
                         <span id="new_password-error" class="error invalid-feedback">{{ $message }}</span>
@@ -41,7 +41,7 @@
 
                   <div class="form-group">
                     <label for="confirm_new_password">Confirm New Password</label>
-                    <input type="password" class="form-control @error('confirm_new_password')is-invalid @enderror" id="confirm_new_password" name="confirm_new_password" placeholder="Password" autocomplete="off">
+                    <input type="password" class="form-control @error('confirm_new_password')is-invalid @enderror" id="confirm_new_password" name="confirm_new_password" placeholder="Confirm New Password" autocomplete="off">
 
                     @error('confirm_new_password')
                         <span id="confirm_new_password-error" class="error invalid-feedback">{{ $message }}</span>
