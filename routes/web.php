@@ -52,6 +52,10 @@ Route::group(['prefix' => 'admin'], function() {
             return redirect()->route('admin.login');
         });
 
-        
+        Route::get('/u','admin.user-list')->name('admin.u');
+
+        Route::get('/user', 
+            [App\Http\Controllers\Admin\UserDataController::class, 'index']
+        )->name('admin.user.list');
     });
 });

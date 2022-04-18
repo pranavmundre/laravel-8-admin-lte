@@ -19,15 +19,7 @@
 @yield('head_script')
 
 </head>
-<!--
-`body` tag options:
 
-  Apply one or more of the following classes to to the body tag
-  to get the desired effect
-
-  * sidebar-collapse
-  * sidebar-mini
--->
 <body class="hold-transition sidebar-mini">
  <div class="wrapper">
 
@@ -206,15 +198,15 @@
         <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+          <li class="nav-item">
+            <a href="{{ route('admin.dashboard') }}" class="nav-link {{ Request::routeIs('admin.dashboard') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item menu-open">
             <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-user"></i>
               <p>
@@ -224,7 +216,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/admin/user-list" class="nav-link {{ Request::routeIs('admin.user-list') ? 'active' : '' }}">
                   <i class="fa fa-list nav-icon"></i>
                   <p>List</p>
                 </a>
@@ -257,7 +249,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="far fa-board nav-icon"></i>
+                  <i class="far fa-circle nav-icon"></i>
                   <p>Change Password</p>
                 </a>
               </li>
