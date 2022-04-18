@@ -18,6 +18,13 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <!-- /.login-logo -->
+
+  @if(Session::get('error'))
+            <div class="alert alert-danger" >
+                {{Session::get('error')}}
+            </div>
+        @endif
+
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
       <a href="../../index2.html" class="h1"><b>Admin</b>Login</a>
@@ -26,16 +33,12 @@
       <p class="login-box-msg">Sign in to start your session</p>
 
 
-      @if(Session::get('error'))
-            <div class="alert alert-danger" style="color: red;">
-                {{Session::get('error')}}
-            </div>
-        @endif
+      
 
         <form method="POST" action="{{ route('admin.login') }}">
             @csrf
             <div class="input-group mb-3">
-              <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+              <input type="email" id="email" name="email" class="form-control" placeholder="Email" autofocus>
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
@@ -77,12 +80,12 @@
       </div>
       <!-- /.social-auth-links -->
 
-      <p class="mb-1">
+      {{-- <p class="mb-1">
         <a href="forgot-password.html">I forgot my password</a>
       </p>
       <p class="mb-0">
         <a href="register.html" class="text-center">Register a new membership</a>
-      </p>
+      </p> --}}
     </div>
     <!-- /.card-body -->
   </div>
@@ -96,6 +99,13 @@
 <script src="{{ asset('admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js')}}"></script>
+
+
+<script>
+$(".alert").delay(4000).slideUp(200, function() {
+    $(this).alert('close');
+});
+</script>
 </body>
 </html>
 
