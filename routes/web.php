@@ -42,5 +42,9 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('/logout', function(){
             return redirect()->route('admin.login');
         });
+
+        Route::get('/user-list', function(){
+            return view('admin.user-list');
+        });
     });
 });
