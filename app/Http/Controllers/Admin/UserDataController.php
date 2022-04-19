@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Hash;
+use Hash, Mail;
 
 class UserDataController extends Controller
 {
@@ -27,15 +27,11 @@ class UserDataController extends Controller
         $recordsTotal = User::all()->count();
         $recordsFiltered = $recordsTotal; 
 
-        // print_r($start);
-        
         if ($search){
             $user = User::where('name', 'LIKE', '%' . $search . '%')
                         ->orWhere ( 'email', 'LIKE', '%' . $search . '%' );
-                        
 
             $recordsFiltered = $user->count();
-
             $user = $user->skip($start)->take($length)->get();
         }
         else{
@@ -66,22 +62,20 @@ class UserDataController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        try {
-            $user = new User;
-            $user->name = $request->input('firstname').' '.$request->input('lastname');
-            $user->email = $request->input('email');
-            $user->password  = Hash::make($request->input('password'));
-            $user->save();
+        $exit_user = User::where('email',  $request->input('email'))->get()->count();
 
-        } 
-        // catch (Illuminate\Database\QueryException $e){
-        catch (Exception $e){
-            $errorCode = $e->errorInfo[1];
-
-            if($errorCode == 1062){
-                return redirect()->back()->with('error','User already exist with this details.');
-            }
+        if ($exit_user) {
+            return redirect()->back()
+                    ->withInput($request->input())
+                    ->with('error','User already exist with this details.')
+                    ->withErrors(['email'=> 'User already exist.']);
         }
+
+        $user = new User;
+        $user->name = $request->input('firstname').' '.$request->input('lastname');
+        $user->email = $request->input('email');
+        $user->password  = Hash::make($request->input('password'));
+        $user->save();
 
 
         $data = array(

@@ -98,7 +98,7 @@
       "responsive": true, 
       "lengthChange": false, 
       "autoWidth": false,
-      "pageLength": 1,
+      "pageLength": 10,
       // "ordering": false,
       // "paging": true,
       // "searching": true,

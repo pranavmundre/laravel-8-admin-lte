@@ -12,7 +12,7 @@
   @endif
   
   @if(session()->has('error'))
-      <div class="alert alert-error col-lg-6">
+      <div class="alert alert-danger col-lg-6">
           {{ session()->get('error') }}
       </div>
   @endif
@@ -60,7 +60,7 @@
 
                   <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="text" class="form-control @error('password')is-invalid @enderror" id="password" name="password" placeholder="Enter Password" autocomplete="off">
+                    <input type="text" class="form-control @error('password')is-invalid @enderror" id="password" name="password" placeholder="Enter Password" autocomplete="off" value="{{ old('password') }}">
                     @error('password')
                         <span id="password-error" class="invalid-feedback" role="alert">{{ $message }}</span>
                       @enderror
