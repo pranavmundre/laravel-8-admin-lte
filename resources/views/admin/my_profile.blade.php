@@ -37,15 +37,24 @@
       <div class="card-body">
         <div class="">
             <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle"
-                       src="{{ asset('admin-lte/dist/img/user1-128x128.jpg')}}"
-                       alt="User profile picture">
+              @if($user['profile_pic'])
+                <img class="profile-user-img img-fluid img-circle"
+                   src="{{ asset($user['profile_pic'])}}"
+                   alt="User profile picture">
+          
+              @else
+                <img class="profile-user-img img-fluid img-circle"
+                   src="{{ asset('admin-lte/dist/img/default-150x150.png')}}"
+                   alt="User profile picture">
+              @endif
+
                 </div>
             <div class="">
               <h3 class="profile-username text-center">
                 {{$user['firstname']}} {{$user['lastname']}}
               </h3>
 
+              <hr>
               
               <p>
                 <strong>Email: </strong> {{$user['email']}}
@@ -113,11 +122,29 @@
                       <input type="text" value="{{$user['mobile_no']}}" class="form-control" id="mobile_no" name="mobile_no" readonly>
                     </div>
                   </div>
+
+                  <div class="form-group row">
+                    <label for="profile_pic" class="col-sm-3 col-form-label">Profile Picture</label>
+                    <div class="col-sm-9">
+                        <div class="input-group @error('profile_pic')is-invalid @enderror">
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input @error('profile_pic')is-invalid @enderror" id="profile_pic" name="profile_pic" accept="image/*" readonly>
+
+                            <label class="custom-file-label " for="profile_pic">Choose Profile Picture</label>
+
+                          </div>
+                        </div>
+                          @error('profile_pic')
+                            <span id="profile_pic-error" class="error invalid-feedback">{{ $message }}</span>
+                          @enderror
+                    </div>
+                  </div>
+
                   <div class="form-group row">
                     <label for="" class="col-sm-3 col-form-label">Is SuperAdmin</label>
                     <div class="col-sm-9 form-group">
                       <div class="icheck-primary ">
-                        <input type="checkbox" checked="{{$user['is_superuser']}}" class="" id="is_superuser" name="is_superuser" disabled>
+                        <input type="checkbox" checked="{{$user['is_superuser']}}" class="" id="is_superuser" name="is_superuser" onclick="return false;" onkeydown="return false;">
                         <label for="is_superuser"></label>
                       </div>
                     </div>
@@ -149,6 +176,7 @@
 
 
 @section('footer_script')
+<script src="{{ asset('admin-lte/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 
 <script>
 
@@ -171,6 +199,9 @@ $(function () {
       $(this).alert('close');
   });
 
+$(function () {
+  bsCustomFileInput.init();
+});
 
 });
 
