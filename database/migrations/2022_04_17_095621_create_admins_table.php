@@ -22,6 +22,7 @@ class CreateAdminsTable extends Migration
 
             $table->string('mobile_no')->unique();
             $table->timestamp('mobile_no_verified_at')->nullable();
+            $table->string('profile_pic')->nullable();
 
             $table->boolean('is_superuser')->default(false);
             $table->boolean('is_staff')->default(false);
