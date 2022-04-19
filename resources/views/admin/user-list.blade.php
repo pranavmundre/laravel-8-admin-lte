@@ -24,6 +24,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
                   </tr>
@@ -34,6 +35,7 @@
                   </tbody>
                   <tfoot>
                   <tr>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
                   </tr>
@@ -83,27 +85,34 @@
       "processing": true,
       "serverSide": true,
 
-      {{-- "ajax": "{{ route('admin.user_table_data') }}", --}}
       "ajax": {
-        "type": "get",
+        "type": "post",
         "url": "{{ route('admin.user_table_data') }}",
-        // "data": {
-        //     'csrf-token' : '{{ csrf_token() }}' 
-        //     },
+        "data": {
+          '_token' : '{{ csrf_token() }}' 
+        },
       },
-      // "columns": [
-      //       { "data": "name" },
-      //       { "data": "email" },
-      //   ],
+      
+      "columnDefs": [ 
+            {
+                "targets": [ 0 ],
+                "visible": true,
+            },
+            {
+                "targets": [ 1 ],
+                "visible": true
+            }
+        ],
+
       "responsive": true, 
-      "lengthChange": false, 
+      "lengthChange": true, 
       "autoWidth": false,
       "pageLength": 10,
       // "ordering": false,
       // "paging": true,
-      // "searching": true,
-      
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "searching": true,
+      // "dom": 'Bfrtip',
+      // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
     

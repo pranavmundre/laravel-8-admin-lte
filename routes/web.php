@@ -79,7 +79,7 @@ Route::group(['prefix' => 'admin'], function() {
             [UserDataController::class, 'index']
         )->name('admin.user_list');
 
-        Route::get('/user/list-data',  
+        Route::post('/user/list-data',  
             [UserDataController::class, 'userTableData']
         )->name('admin.user_table_data');
     });

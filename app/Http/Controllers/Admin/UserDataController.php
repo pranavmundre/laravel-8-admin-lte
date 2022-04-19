@@ -17,9 +17,20 @@ class UserDataController extends Controller
 
     public function userTableData(Request $request)
     {
+        $this->validate($request, [
+            'search' => 'required',
+            'order' => 'required',
+            'length' => 'required',
+            'start' => 'required',
+            'draw' => 'required',
+        ]);
+
+        $order = $request->input('order');
+        $columns = array('id', 'name', 'email');
+        $order_col = $columns[$order[0]['column']];
+        $order_by = $order[0]['dir'];
 
         $search = $request->input('search')['value'];
-        $order = $request->input('order');
         $length = (int)$request->input('length');
         $start = (int)$request->input('start');
         $draw = (int)$request->input('draw');
@@ -32,15 +43,15 @@ class UserDataController extends Controller
                         ->orWhere ( 'email', 'LIKE', '%' . $search . '%' );
 
             $recordsFiltered = $user->count();
-            $user = $user->skip($start)->take($length)->get();
+            $user = $user->orderBy($order_col, $order_by)->skip($start)->take($length)->get();
         }
         else{
-            $user = User::skip($start)->take($length)->get();
+            $user = User::orderBy($order_col, $order_by)->skip($start)->take($length)->get();
         }
-        
+
         $data = array();
         foreach ($user as $value) {
-            array_push($data, array($value['name'], $value['email']))  ;
+            array_push($data, array($value['id'], $value['name'], $value['email']))  ;
         }
 
         return [
