@@ -21,7 +21,7 @@
       </div>
       <div class="card-body">
         <div class="">
-           <form class="" method="POST" action="{{route('admin.change_password_submit')}}" autocomplete="off">
+           <form class="" method="POST" action="{{route('admin.change_password')}}" autocomplete="off">
                 @csrf
                   <div class="form-group">
                     <label for="current_password">Current Password</label>

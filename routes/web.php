@@ -60,11 +60,11 @@ Route::group(['prefix' => 'admin'], function() {
             [AdminController::class, 'update_profile']
         )->name('admin.update_profile');
 
-        Route::view('/change-password', 'admin.change-password')->name('admin.change_password');
+        Route::view('/change-password', 'admin.change-password');
 
-        Route::post('/change-password-submit', 
+        Route::post('/change-password', 
             [AdminController::class, 'change_password']
-        )->name('admin.change_password_submit');
+        )->name('admin.change_password');
 
         Route::get('/logout', function(){
             return redirect()->route('admin.login');
