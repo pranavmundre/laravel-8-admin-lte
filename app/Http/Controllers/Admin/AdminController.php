@@ -51,18 +51,31 @@ class AdminController extends Controller
         $this->validate($request, [
             'firstname' => 'required',
             'lastname' => 'required',
+            'profile_pic' => 'mimes:jpg,png,jpeg',
 
         ]);
 
-        $user = Admin::find(Auth::user());
+        $user = Admin::find(Auth::user()->id);
         $user->firstname  = $request->input('firstname');
         $user->lastname  = $request->input('lastname');
+
+        if ($request->hasFile('profile_pic')) {
+
+		    if (!$request->file('profile_pic')->isValid()) {
+        		return redirect()->back()->withErrors(['profile_pic'=> 'upload valid image.']);
+			}
+
+			$path = $request->profile_pic->store('public/images');
+
+			$user->profile_pic = str_replace( 'public', 'storage', $path,);
+			
+		}
 
         $user->update();
 
         session()->flash('user_status', 'Profile Updated');
 
-        return redirect()->route('admin.my_profile');
+        return redirect()->back();
     }
 
     public function change_password(Request $request)
