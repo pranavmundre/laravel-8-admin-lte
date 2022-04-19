@@ -1,10 +1,10 @@
-# user-admin-authentication-laravel
+# Admin LTE integration with laravel 8
 
 this is the core project for user and admin authentication 
 
 
 to add admin use tinker 
-
+```
 $ php artisan tinker 
 >>> $model = new App\Models\Admin;
 => App\Models\Admin {#3581}
@@ -17,6 +17,6 @@ $ php artisan tinker
 >>> $model->password = Hash::make('admin123')
 => "$2y$10$FDu7iDKnfta6E/m1yZnDxOHINoPtTym89Z49SEDPe5ks33eJ0LeNW"
 >>> $model->save();
-
+```
 
 Thank you.
